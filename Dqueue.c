@@ -11,6 +11,7 @@ void OutputRestricted();
 void ORFront();
 void ORRear();
 
+
 int main()
 {
     system("cls");
