@@ -15,12 +15,7 @@ void push()
     if(top == SIZE -1 )
     {
         system("clear");
-<<<<<<< HEAD
-        printf("**** Stack OverFlow ****\n");
-        printf("//////////////////////////////////\n\n");
-=======
         printf("**** Stack OverFlow ****\n\n");
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
     }
 
     else
@@ -31,10 +26,7 @@ void push()
         stack[top] = value; // Pushing Element On The Top Of Stack
         system("clear");
         printf("**** %d Pushed Successfully ****\n",stack[top]);
-<<<<<<< HEAD
         printf("//////////////////////////////////\n\n");
-=======
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
     }
 }
 
@@ -44,7 +36,6 @@ void pop()
     if(top == -1)
     {
         system("clear");
-<<<<<<< HEAD
         printf("**** Stack Underflow ****\n");
         printf("//////////////////////////////////\n\n");
     }
@@ -53,49 +44,30 @@ void pop()
         printf("%d Element Is Deleted....\n",stack[top]);
         top--;
         printf("//////////////////////////////////\n\n");
-=======
-        printf("**** Stack Underflow ****\n\n");
-    }
-
-    else{
-        printf("%d Element Is Deleted....\n\n",stack[top]);
-        top--;
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
     }
 }
 
 void display()
 {
-<<<<<<< HEAD
     if(top == -1)
     {
         printf("**** No Stack Elements Present ****\n");
         printf("//////////////////////////////////\n\n");
         return;
     }
-=======
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
     printf("**** Stack Elements ****\n\n");
     
     for (int i = 0; i <= top; i++)
     {
         printf("%d ",stack[i]);    
     }
-<<<<<<< HEAD
     printf("\n");
     printf("//////////////////////////////////\n\n");
-=======
-    
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
 }
 
 int main()
 {
-<<<<<<< HEAD
     system("clear");
-=======
-    system("cls");
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
     int choice;
 
     do
@@ -130,10 +102,7 @@ int main()
         default:
             system("clear");
             printf("**** Invalid Choice ****\n");
-<<<<<<< HEAD
             printf("//////////////////////////////////\n\n");
-=======
->>>>>>> 7a4715fc4ce64c396ee99256fb26773f09a3eaad
             break;
         }
     } while (choice!=4);

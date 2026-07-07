@@ -7,7 +7,7 @@ void EnterElement()
 {
     int value;
 
-    if (rear == SIZE - 1)
+    if (rear == SIZE )
     {
         system("clear");
         printf("====> Queue Is Full <====\n\n");
