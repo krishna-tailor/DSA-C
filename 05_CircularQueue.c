@@ -8,95 +8,56 @@ int front = -1, rear = -1, queue[SIZE];
 void enterElement()
 {
     int value;
-    if (rear == SIZE  - 1 && front == 0)
+
+    if ((rear + 1) % SIZE == front)
     {
         system("clear");
-        printf("====> Queue Is Full <====\n");
+        printf("==== Queue Is OverFlow ====\n");
+        return;
     }
 
-    else if (rear == front - 1)
-    {
-        system("clear");
-        printf("====> Queue Is Full <====\n");
-    }
-
-    else if (front == -1 && rear == -1)
-    {
-        printf("Enter Value: ");
-        scanf("%d", &value);
-
-        rear++;
-        front++;
-        queue[rear] = value;
-        system("clear");
-        printf("====> %d Entered Successfully <====\n", value);
-        
-    }
-
-    else if (rear == SIZE - 1 && front != 0)
-    {
-        printf("Enter Value: ");
-        scanf("%d", &value);
-
-        rear = 0;
-
-        queue[rear] = value;
-
-        system("clear");
-        printf("====> %d Entered Successfully <====\n", value);
-    }
+    if (front == -1)
+        front = rear = 0;
 
     else
-    {
-        printf("Enter Value: ");
-        scanf("%d", &value);
+        rear = (rear + 1) % SIZE;
 
-        rear++;
-        queue[rear] = value;
+    printf("Enter Value: ");
+    scanf("%d", &value);
 
-        system("clear");
-        printf("====> %d Entered Successfully <====\n", value);
-        
-    }
+    queue[rear] = value;
+    system("clear");
+    printf("==== %d Inserted Sucessfully ====\n", value);
 }
 
 void deleteElement()
 {
-    if (front == -1 && rear == -1)
+    if (front == -1)
     {
         system("clear");
-        printf("====> Queue Is Already Empty <====\n");
+        printf("==== Queue Is Underflow ====\n");
+        return;
     }
 
-    else if (front == rear)
-    {
-        system("clear");
-        printf("====> %d Deleted Successfully and now queue is empty <====\n", queue[front]);
+    printf("==== %d Deleted Sucessfully ====\n", queue[front]);
+
+    if (front == rear)
         front = rear = -1;
-    }
-
-    else if(rear >=0 && front == SIZE )
-    {
-        system("clear");
-        front = 0;
-        printf("====> %d Deleted Successfully <====\n",queue[front]);
-    }
 
     else
-    {
-        system("clear");
-        printf("====> %d Deleted Successfully <====\n", queue[front++]);
-    }
+        front = (front + 1) % SIZE;
 }
 
 void display()
 {
 
-    if(front == -1 && rear == -1)
+    if (front == -1 && rear == -1)
     {
         system("clear");
         printf("====> Queue Is Empty No Elements Present <====\n");
+        return;
     }
+    
     for (int i = 0; i < 5; i++)
     {
         printf("%d ", queue[i]);
