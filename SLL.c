@@ -1,315 +1,205 @@
-/*
-    Singly Linked List Program
-*/
-
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-struct SLL
+struct node
 {
     int data;
-    struct SLL *next;
-} *head = NULL, *temp, *node, *newNode, *ptemp;
+    struct node *next;
+} *head, *temp, *new;
 
-
-void createNode()
+void main_menu()
 {
-    int value;
-    printf("Enter Value: ");
-    scanf("%d", &value);
-    
-    node = (struct SLL *)malloc(sizeof(struct SLL));
-    
-    node->data = value;
-    node->next = NULL;
+    printf("== == == SLL Operations == == ==\n");
+    printf("--------------------------------\n");
+    printf("1. Insert \n2. Delete \n3. Display \n4. Exit...\n");
 }
 
-void mainMenu();
-void insertMenu();
-void insertFromFront();
-void insertFromRear();
-void insertBeforePos();
-void insertAfterPos();
+void insert_menu()
+{
+    printf("== == == Insert Operations == == ==\n");
+    printf("1. Insert From Begning \n2. Insert From Rear \n3. Insert At Specific Position \n4. Back To Main Menu..");
+}
 
-///////////////////////////////////////////////////////
-/////////////// Display Functions ////////////////////
-/////////////////////////////////////////////////////
+void create_node()
+{
+    int value;
 
-void display();
-void displaySort();
-void originalDisplay();
-void displayReverse();
+    new = (struct node *)malloc(sizeof(struct node));
+    if (new == NULL)
+    {
+        system("clear");
+        printf("***** Memory OverFlow *****\n\n");
+    }
+
+    else
+    {
+        printf("Enter Your Value: ");
+        scanf("%d", &value);
+
+        new->data = value;
+        new->next = NULL;
+    }
+}
+
+void insert_beg()
+{
+    create_node();
+    new->next = head;
+    head = new;
+    system("clear");
+    printf("***** New Node Added Successfully *****\n\n");
+}
+
+void insert_end()
+{
+    if (head == NULL)
+    {
+        insert_beg();
+    }
+
+    else
+    {
+        create_node();
+        temp = head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = new;
+        new->next = NULL;
+        printf("***** New Node Added Successfully *****\n\n");
+    }
+}
+
+void display()
+{
+    if (head == NULL)
+    {
+        system("clear");
+        printf("***** No Nodes Available *****\n\n");
+    }
+
+    else
+    {
+        temp = head;
+        do
+        {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        } while (temp != NULL);
+        printf("\n\n");
+    }
+}
+
+void insert_specific_pos()
+{
+    int pos;
+    printf("Enter Position To Enter A Node: ");
+    scanf("%d", &pos);
+
+    if (head == NULL && pos > 1)
+    {
+        printf("***** Position Out Of Bound *****\n\n");
+        return;
+    }
+    else if (pos == 1)
+    {
+        insert_beg();
+        return;
+    }
+
+    else
+    {
+        create_node();
+        temp = head;
+        for (int i = 1; i <= pos - 2; i++)
+        {
+            if (temp == NULL)
+            {
+                system("clear");
+                printf("***** Position Out Of Bound *****\n\n");
+                return;
+            }
+
+            temp = temp->next;
+        }
+
+        new->next = temp->next;
+        temp->next = new;
+    }
+
+    system("clear");
+    printf("***** New Node Added Successfully *****\n\n");
+}
 
 int main()
 {
-    system("cls");
-    int choice;
+    system("clear");
+    int choice, choice1;
 
     do
     {
-        mainMenu();
+        main_menu();
         printf("Enter Your Choice: ");
         scanf("%d", &choice);
 
         switch (choice)
         {
         case 1:
-            system("cls");
+            system("clear");
             do
             {
-                insertMenu();
-                printf("Enter Your Choice: ");
-                scanf("%d", &choice);
-                switch (choice)
+
+                insert_menu();
+                printf("\nEnter Your Choice: ");
+                scanf("%d", &choice1);
+
+                switch (choice1)
                 {
                 case 1:
-                    system("cls");
-                    insertFromFront();
+                    system("clear");
+                    insert_beg();
                     break;
 
                 case 2:
-                    system("cls");
-                    insertFromRear();
+                    system("clear");
+                    insert_end();
                     break;
 
                 case 3:
-                    system("cls");
-                    insertBeforePos();
+                    system("clear");
+                    insert_specific_pos();
                     break;
 
                 case 4:
-                    system("cls");
-                    insertAfterPos();
-                    break;
-                case 6:
-                    system("cls");
+                    system("clear");
+                    printf("***** Returned To Main Menu *****\n\n");
                     break;
 
                 default:
-                    system("cls");
-                    printf("Invalid Che..");
+                    system("clear");
+                    printf("***** Invalid Choice *****\n");
                     break;
                 }
-
-            } while (choice != 6);
-            break;
-
-        case 2:
-            system("cls");
-            display();
+            } while (choice1 != 4);
             break;
 
         case 3:
-            system("cls");
-            printf("Will Come Soon..");
+            system("clear");
+            display();
+            break;
+
+        case 4:
+            system("clear");
+            printf("***** Bye Bye Tata Good Bye Gaya *****\n");
             break;
 
         default:
-            system("cls");
-            printf("Invalid Che..");
+            system("clear");
+            printf("***** Invalid Choice *****\n\n");
             break;
         }
-    } while (choice != 3);
-}
 
-void mainMenu()
-{
-    printf("1. Insert\n");
-    printf("2. Display\n");
-    printf("3. Exit..\n");
-}
-
-void insertMenu()
-{
-    printf("1. Insert From Front\n");
-    printf("2. Insert From Rear\n");
-    printf("3. Insert at the Before specific position\n");
-    printf("4. Insert at the after specific Position\n");
-    printf("5. Insert into sorted Linked list\n");
-    printf("6. Back To Main Menu..\n");
-}
-
-void insertFromFront()
-{
-    createNode();
-    node->next = head; // Default Value Null
-    head = node;
-}
-
-void insertFromRear()
-{
-    int value;
-
-    printf("Enter Your Value: ");
-    scanf("%d", &value);
-
-    newNode = (struct SLL *)malloc(sizeof(struct SLL));
-
-    newNode->data = value;
-    newNode->next = NULL;
-
-    temp = head;
-    free(node);
-    do
-    {
-        node = (struct SLL *)malloc(sizeof(struct SLL));
-        node->data = temp->data;
-        node->next = temp->next;
-
-        temp = temp->next;
-    } while (temp->next != NULL || temp->next == NULL);
-}
-
-void insertBeforePos()
-{
-    int pos, i;
-    printf("Enter position=>");
-    scanf("%d", &pos);
-    temp = head;
-    for (i = 1; i < pos; i++)
-    {
-        ptemp = temp;
-        temp = temp->next;
-        if (temp == NULL)
-        {
-            printf("Position not found....");
-            return;
-        }
-    }
-
-    createNode();
-    ptemp->next = node;
-    node->next = temp;
-}
-
-void insertAfterPos()
-{
-    printf("insert after pos func called\n");
-    int pos, value;
-
-    printf("Enter The Position To Insert The Value: ");
-    scanf("%d", &pos);
-
-    temp = head;
-    for (int i = 1; i <= pos; i++)
-    {
-        ptemp = temp;
-        temp = temp->next;
-
-        if (temp == NULL)
-        {
-            printf("\n\nNo Position Found\n\n");
-            return;
-        }
-    }
-
-    createNode();
-    ptemp->next = node;
-    node->next = temp;
-}
-
-void display()
-{
-    int choice;
-
-    printf("1. Print Original Linekd List\n2. Print Sorted Linked List \n3. Print Linked List In Reverse Order\n");
-    printf("Enter Your Choice: ");
-    scanf("%d", &choice);
-    switch (choice)
-    {
-
-    case 1:
-        system("cls");
-        originalDisplay();
-        break;
-
-    case 2:
-        system("cls");
-        displaySort();
-        break;
-
-    case 3:
-        system("clear");
-        displayReverse();
-        break;
-
-    default:
-        break;
-    }
-}
-
-void originalDisplay()
-{
-    temp = head;
-    while (temp != NULL)
-    {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    }
-    printf("\n\n");
-}
-
-void displaySort()
-{
-    int tempv, arr[100], i = 0;
-    temp = head;
-
-    do
-    {
-        arr[i] = temp->data;
-        i++;
-        temp = temp->next;
-    } while (temp != NULL);
-
-    for (int k = 0; k <= i; k++)
-    {
-        for (int j = 0; j <= i; j++)
-        {
-            if (arr[k] > arr[j])
-            {
-                tempv = arr[k];
-                arr[k] = arr[j];
-                arr[j] = tempv;
-            }
-        }
-    }
-
-    for (int k = 0; k <= i; k++)
-    {
-        printf("%d ", arr[k]);
-    }
-
-    printf("\n\n");
-}
-
-void displayReverse()
-{
-    int tempv, arr[100], i = 0, j = 0;
-    temp = head;
-
-    do
-    {
-        arr[i] = temp->data;
-        i++;
-        temp = temp->next;
-        j++;
-    } while (temp != NULL);
-
-    j--;
-   
-    for (int k = 0; k <= i / 2; k++)
-    {
-        tempv = arr[k];
-        arr[k] = arr[j];
-        arr[j] = tempv;
-        j--;
-    }
-  
-
-    for (int k = 0; k < i; k++)
-    {
-        printf("%d ", arr[k]);
-    }
-
-    printf("\n\n");
+    } while (choice != 4);
 }
